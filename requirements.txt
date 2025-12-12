@@ -1,0 +1,4 @@
+shiny>=0.6.0
+uvicorn
+requests
+uvicorn
