@@ -142,7 +142,7 @@ def pred_tit(chills, hypothermia, anemia, rdw, malignancy):
 # Server
 # -------------------------------
 def server(input, output, session):
-    raw_qs = session._session.scope.get("query_string", b"").decode()
+    raw_qs = session.scope.get("query_string", b"").decode()
 
     # ✨ 轉成 dict
     qp = {k: v[0] for k, v in parse_qs(raw_qs).items()}
