@@ -142,17 +142,15 @@ def pred_tit(chills, hypothermia, anemia, rdw, malignancy):
 # Server
 # -------------------------------
 def server(input, output, session):
-    qp = session.request.query_params
+    raw_qs = session._session.scope.get("query_string", b"").decode()
+
+    # ✨ 轉成 dict
+    qp = {k: v[0] for k, v in parse_qs(raw_qs).items()}
 
     print("=== DEBUG QUERY PARAMS ===")
-    print("All params:", qp)
-    print("token =", qp.get("token"))
-    print("pid   =", qp.get("pid"))
-    print("fhir  =", qp.get("fhir"))
+    print("raw_qs:", raw_qs)
+    print("parsed:", qp)
     print("===========================")
-
-    # ⭐ 新增：取得 URL query（token, pid, fhir）
-    query = session.input
     token = query.get("token")
     pid   = query.get("pid")
     fhir  = query.get("fhir")
