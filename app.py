@@ -142,12 +142,13 @@ def pred_tit(chills, hypothermia, anemia, rdw, malignancy):
 # Server
 # -------------------------------
 def server(input, output, session):
-    
-    print("=== DEBUG: Query Params ===")
-    print("params =", session.input.params)
-    print("token =", session.input.params.get("token"))
-    print("pid   =", session.input.params.get("pid"))
-    print("fhir  =", session.input.params.get("fhir"))
+    qp = session.request.query_params
+
+    print("=== DEBUG QUERY PARAMS ===")
+    print("All params:", qp)
+    print("token =", qp.get("token"))
+    print("pid   =", qp.get("pid"))
+    print("fhir  =", qp.get("fhir"))
     print("===========================")
 
     # ⭐ 新增：取得 URL query（token, pid, fhir）
